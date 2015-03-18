@@ -1,0 +1,13 @@
+<div class="slideshow" ng-swipe-right="previous()" ng-swipe-left="next()">
+	<div class="slideshow-contents" ng-transclude>
+	</div>
+	<div class="slideshow-controls" ng-if="playlist.length > 1">
+		<div class="slideshow-controls-wrapper">
+		<a class="slideshow-control slideshow-previous" ng-click="previous()"><i class="fa fa-chevron-left"></i></a>
+		<a class="slideshow-control slideshow-next" ng-click="next()"><i class="fa fa-chevron-right"></i></a>
+		</div>
+	</div>
+	<div class="slideshow-nav" ng-if="playlist.length > 1">
+		<a ng-click="select(item)" ng-repeat="item in playlist.items" ng-class="{active:item.active}"><i class="fa" ng-class="{'fa-circle-o':!item.active, 'fa-circle':item.active}"></i></a>
+	</div>
+</div>
