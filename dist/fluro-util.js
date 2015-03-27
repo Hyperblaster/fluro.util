@@ -455,17 +455,33 @@ angular.module('fluro.util')
         var _items = [];
         var _index = 0;
         var _loop = true;
+        var _direction = 'forwards';
 
         /////////////////////////////
 
         this.__defineSetter__("index", function(i) {
+
+            if(i < _index) {
+                _direction = 'backwards';
+            } else {
+                _direction = 'forwards';
+            }
+
             if (i != _index) {
+
                 _index = i;
             }
         });
 
         this.__defineGetter__("index", function() {
             return _index;
+        });
+
+
+        /////////////////////////////
+
+        this.__defineGetter__("direction", function() {
+            return _direction;
         });
 
         /////////////////////////////
