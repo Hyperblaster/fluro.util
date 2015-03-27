@@ -281,7 +281,7 @@ angular.module('fluro.util')
                 return _maximum;
             },
             set: function(m) {
-                console.log('Set Maximum to ', m)
+                //console.log('Set Maximum to ', m)
                 _maximum = m;
             }
         });
