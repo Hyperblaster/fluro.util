@@ -85,7 +85,7 @@ angular.module('fluro.util')
             if (_.isObject(item)) {
 
                 //Check if the item has a track value
-                if(item.hasOwnProperty(collection.trackValue)) {
+                if (item.hasOwnProperty(collection.trackValue)) {
                     id = item[collection.trackValue];
                 } else {
                     //Key is undefined on object
@@ -94,7 +94,7 @@ angular.module('fluro.util')
                 }
             }
 
-            var result =  _.any(collection.items, function(existingItem) {
+            var result = _.any(collection.items, function(existingItem) {
 
                 if (_.isObject(existingItem)) {
                     if (existingItem.hasOwnProperty(collection.trackValue)) {
@@ -107,7 +107,7 @@ angular.module('fluro.util')
                 }
             });
 
-            
+
 
             return result;
         }
@@ -135,9 +135,9 @@ angular.module('fluro.util')
         collection.add = function(item) {
 
 
-            if(_.isObject(item)) {
+            if (_.isObject(item)) {
                 //If the item does not have the track value
-                if(!item.hasOwnProperty(collection.trackValue)) {
+                if (!item.hasOwnProperty(collection.trackValue)) {
                     console.log('Track value ' + "'" + collection.trackValue + "'" + ' Not found on proposed item', item)
                     return;
                 }
@@ -151,7 +151,7 @@ angular.module('fluro.util')
                 }
             }
 
-            
+
 
 
             //If we are already at the maximum
@@ -175,7 +175,7 @@ angular.module('fluro.util')
 
             //Only keep unique values
             collection.items = _.uniq(collection.items, function(item) {
-                
+
                 if (_.isObject(item)) {
                     if (item.hasOwnProperty(collection.trackValue)) {
                         return item[collection.trackValue];
@@ -228,7 +228,7 @@ angular.module('fluro.util')
             }
 
             _.remove(collection.items, function(existingItem) {
-               
+
                 if (_.isObject(existingItem)) {
                     if (existingItem.hasOwnProperty(collection.trackValue)) {
                         return (existingItem[collection.trackValue] == id);
@@ -245,9 +245,19 @@ angular.module('fluro.util')
 
         collection.removeMultiple = function(array) {
 
-            console.log('REMOVE MULTIPLE', array)
+            console.log('REMOVE MULTIPLE BEFORE', collection.items.length);
+
+            _.remove(collection.items, function(existingItem) {
+               return _.contains(array, existingItem);
+               //collection.contains(existingItem);
+               // return collection.contains(existingItem);
+            })
+
+            console.log('REMOVE MULTIPLE AFTER', collection.items.length);
+
+            /*
             //Loop through each item to remove
-            var removed = _.each(array, function(removeItem) {
+            _.each(array, function(removeItem) {
 
 
 
@@ -257,18 +267,17 @@ angular.module('fluro.util')
                     return collection.contains(existingItem);
                 })
             })
-
-            console.log(removed, 'STUFF');
+*/
         }
 
         //////////////////////////////////////////////
 
         Object.defineProperty(collection, 'ids', {
-            
+
             get: function() {
 
                 return _.map(collection.items, function(item) {
-                    
+
                     if (_.isObject(item)) {
                         if (item.hasOwnProperty('_id')) {
                             return item._id;
@@ -340,7 +349,6 @@ angular.module('fluro.util')
     return Collection;
 
 });
-
 
 'use strict';
 
