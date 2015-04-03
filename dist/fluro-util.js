@@ -245,12 +245,20 @@ angular.module('fluro.util')
 
         collection.removeMultiple = function(array) {
 
+            console.log('REMOVE MULTIPLE', array)
             //Loop through each item to remove
-            _.each(array, function(removeItem) {
+            var removed = _.each(array, function(removeItem) {
+
+
+
+
+                console.log('Remove item from collection', removeItem)
                 _.remove(collection.items, function(existingItem) {
                     return collection.contains(existingItem);
                 })
             })
+
+            console.log(removed, 'STUFF');
         }
 
         //////////////////////////////////////////////
