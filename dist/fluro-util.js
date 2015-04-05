@@ -366,11 +366,16 @@ angular.module('fluro.util')
 
     //////////////////////////////////////////////////
 
-    controller.resource = function(type, ignoreLoadingBar) {
+    controller.resource = function(type, ignoreLoadingBar, noCache) {
 
         var cache = $cacheFactory.get(type + '-list');
         if(!cache) {
             cache = $cacheFactory(type + '-list');
+        }
+
+        
+        if(noCache) {
+            cache = false;
         }
 
         
