@@ -476,7 +476,8 @@ angular.module('fluro.util')
 .service('Notifications', function($timeout) {
 
     var controller = {
-        list: []
+        list: [],
+        defaultDelay:2000,
     }
 
     /////////////////////////////////////////////////////
@@ -502,7 +503,7 @@ angular.module('fluro.util')
         }
 
         if (typeof delay === 'undefined') {
-            delay = 3000;
+            delay = controller.defaultDelay;
         }
 
         var msg = {};
