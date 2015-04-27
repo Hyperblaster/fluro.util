@@ -437,7 +437,7 @@ angular.module('fluro.util')
         //We have a range
         if (startDate.format('d/m/y') != endDate.format('d/m/y')) {
             if (startDate.format('M Y') == endDate.format('M Y')) {
-                string = startDate.format('j') + ' - ' + endDate.format('j F');
+                string = startDate.format('l j') + ' - ' + endDate.format('l j F');
             } else {
                 string = startDate.format('l j F') + ' until ' + endDate.format('l j F');
             }
