@@ -349,6 +349,8 @@ angular.module('fluro.util')
     controller.genericResource = function(type, ignoreLoadingBar, noCache) {
 
         var cache = $cacheFactory.get(type + '-list');
+
+
         if(!cache) {
             console.log('Creating ', type + '-list')
             cache = $cacheFactory(type + '-list');
@@ -381,6 +383,8 @@ angular.module('fluro.util')
     controller.resource = function(type, ignoreLoadingBar, noCache) {
 
         var cache = $cacheFactory.get(type + '-list');
+
+        console.log('CACHE FOR', type, cache);
         if(!cache) {
         console.log('Creating ', type + '-list')
 
