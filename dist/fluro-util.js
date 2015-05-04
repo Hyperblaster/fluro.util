@@ -345,7 +345,17 @@ angular.module('fluro.util')
 
     //////////////////////////////////////////////////
 
-    controller.genericResource = function(type) {
+    controller.genericResource = function(type, ignoreLoadingBar, noCache) {
+
+        var cache = $cacheFactory.get(type + '-list');
+        if(!cache) {
+            cache = $cacheFactory(type + '-list');
+        }
+
+        if(noCache) {
+            cache = false;
+        }
+
 
         console.log('Get Generic', type)
         return $resource(Fluro.apiURL + '/generic/' + type + '/:id', {}, {
@@ -355,6 +365,7 @@ angular.module('fluro.util')
             query: {
                 method: 'GET',
                 isArray: true,
+                cache: cache,
                 ignoreLoadingBar: true
             },
             batch: {
@@ -372,7 +383,6 @@ angular.module('fluro.util')
         if(!cache) {
             cache = $cacheFactory(type + '-list');
         }
-
         
         if(noCache) {
             cache = false;
