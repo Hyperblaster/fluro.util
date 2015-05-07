@@ -19,7 +19,7 @@ angular.module('fluro.util')
     controller.clear = function(type) {
         var cache = $cacheFactory.get(type +'-list');
         if(cache) {
-            console.log('CacheManager Clear Cache', type + '-list')
+            //console.log('CacheManager Clear Cache', type + '-list')
             cache.removeAll();
         }
     }
@@ -352,7 +352,7 @@ angular.module('fluro.util')
 
 
         if(!cache) {
-            console.log('Creating ', type + '-list')
+            //console.log('Creating ', type + '-list')
             cache = $cacheFactory(type + '-list');
         }
 
@@ -360,7 +360,7 @@ angular.module('fluro.util')
             cache = false;
         }
 
-        console.log('Get Generic', type)
+        //console.log('Get Generic', type)
         return $resource(Fluro.apiURL + '/generic/' + type + '/:id', {}, {
             update: {
                 method: 'PUT' // this method issues a PUT request
@@ -384,9 +384,9 @@ angular.module('fluro.util')
 
         var cache = $cacheFactory.get(type + '-list');
 
-        console.log('CACHE FOR', type, cache);
+        //console.log('CACHE FOR', type, cache);
         if(!cache) {
-        console.log('Creating ', type + '-list')
+        //console.log('Creating ', type + '-list')
 
             cache = $cacheFactory(type + '-list');
         }
