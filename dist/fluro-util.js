@@ -16,12 +16,44 @@ angular.module('fluro.util')
 
     //////////////////////////////////////////////////
     
+    var _caches = [];
+
+    //////////////////////////////////////////////////
+
+    controller.get = function(type) {
+
+        var cache = $cacheFactory.get(type + '-list');
+
+        
+        if(!cache) {
+            //console.log('Creating ', type + '-list')
+            cache = $cacheFactory(type + '-list');
+            _caches.push(cache);
+        }
+
+        return cache;
+    }
+
+    //////////////////////////////////////////////////
+    
     controller.clear = function(type) {
+        console.log('Clear', type, 'cache');
+        
         var cache = $cacheFactory.get(type +'-list');
         if(cache) {
             //console.log('CacheManager Clear Cache', type + '-list')
             cache.removeAll();
         }
+    }
+
+    //////////////////////////////////////////////////
+    
+    controller.clearAll = function() {
+        console.log('Clear all caches')
+        _.each(_caches, function(cache) {
+            console.log('Clearing cache', cache);
+            cache.removeAll();
+        })
     }
 
     //////////////////////////////////////////////////
@@ -337,7 +369,7 @@ angular.module('fluro.util')
 angular.module('fluro.util')
 
 
-.service('Content', function($resource, $cacheFactory, Fluro) {
+.service('Content', function($resource, CacheManager, Fluro) {
 
 
     //////////////////////////////////////////////////
@@ -348,13 +380,14 @@ angular.module('fluro.util')
 
     controller.genericResource = function(type, ignoreLoadingBar, noCache) {
 
-        var cache = $cacheFactory.get(type + '-list');
+        var cache = CacheManager.get(type);
 
-
+        /*
         if(!cache) {
             //console.log('Creating ', type + '-list')
             cache = $cacheFactory(type + '-list');
         }
+        */
 
         if(noCache) {
             cache = false;
@@ -382,14 +415,16 @@ angular.module('fluro.util')
 
     controller.resource = function(type, ignoreLoadingBar, noCache) {
 
-        var cache = $cacheFactory.get(type + '-list');
+        var cache = CacheManager.get(type);
 
+        /*
         //console.log('CACHE FOR', type, cache);
         if(!cache) {
         //console.log('Creating ', type + '-list')
 
             cache = $cacheFactory(type + '-list');
         }
+        */
         
         if(noCache) {
             cache = false;
