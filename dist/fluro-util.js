@@ -550,6 +550,8 @@ angular.module('fluro.util')
 
     controller.post = function(text, type, delay) {
 
+        console.log('Post notification', text, type, delay);
+
         if (typeof type === 'undefined') {
             type = 'status';
         }
