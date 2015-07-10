@@ -1,12 +1,12 @@
 {
   "name": "fluro.util",
-  "description": "A package of helpful services for interacting with fluro content",
+  "description": "A package of helpful services",
   "homepage": "http://fluro.io",
   "authors": [
     "Cade Embery"
   ],
   "main": "./dist/fluro.util.min.js",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/Hyperblaster/fluro.util.git"
