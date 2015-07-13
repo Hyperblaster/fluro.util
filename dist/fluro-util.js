@@ -3,6 +3,15 @@
 angular.module('fluro.util', [
 	'fluro.config',
 	]);
+
+
+
+app.filter('formatDate', function(){
+  return function(dateString, format){
+    return new Date(dateString).format(format)
+  };
+});
+
 'use strict';
 
 
@@ -67,6 +76,13 @@ angular.module('fluro.util')
 
 
 angular.module('fluro.util')
+
+
+.filter('formatDate', function(){
+  return function(dateString, format){
+    return new Date(dateString).format(format)
+  };
+})
 
 
 .factory('DateTools', function() {
