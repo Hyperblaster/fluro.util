@@ -411,7 +411,8 @@ angular.module('fluro.util')
 
             //Replace all stuff that is scary
             var result = input.replace(commentsAndPhpTags, '')
-                .replace(/\u00A0/g, '') //Replace &nbsp;
+                .replace(/\u00A0/g, ' ') //Replace &nbsp;
+                .replace(/&nbsp;/g, ' ') //Replace &nbsp;
                 .replace(tags, function($0, $1) {
                     return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
                 });
@@ -428,6 +429,7 @@ angular.module('fluro.util')
             //Get the string
             var htmlString = element.eq(0).html();
 
+            console.log('Sanitize', htmlString);
             return htmlString;
         }
 
