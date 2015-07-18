@@ -97,15 +97,18 @@ angular.module('fluro.util')
   };
 })
 angular.module('fluro.util')
-.filter('plaintext', function() {
-    return function(text) {
-        if (text) {
-            return String(text).replace(/<[^>]+>/gm, '');
-        } else {
-            return text;
-        }
-    };
-});
+    .filter('plaintext', function(FluroSanitize) {
+        return function(text) {
+            if (text) {
+
+                //return strip_tags(html, "<br><p><img><a><h1><h2><h3><h4><h5><h6><ol><ul><li>");
+
+                return FluroSanitize.stripTags(text);
+            } else {
+                return text;
+            }
+        };
+    });
 'use strict';
 
 
@@ -386,6 +389,52 @@ angular.module('fluro.util')
 
     return controller;
 });
+
+
+angular.module('fluro.util')
+    .service('FluroSanitize', function() {
+        var controller = {};
+
+        //////////////////////////////////////////////////
+
+        controller.stripTags = function(input, allowed) {
+
+            //Check allowed tags
+            allowed = (((allowed || '') + '')
+                .toLowerCase()
+                .match(/<[a-z][a-z0-9]*>/g) || [])
+                .join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+
+            //Filter through tags
+            var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+                commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+
+            //Replace all stuff that is scary
+            var result = input.replace(commentsAndPhpTags, '')
+                .replace(/\u00A0/g, '') //Replace &nbsp;
+                .replace(tags, function($0, $1) {
+                    return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+                });
+            /**/
+
+
+            var element = $('<div>' + result + '</div>');
+
+            //Remove all style attributs
+            element.find('*')
+                .removeAttr('style');
+            //.removeAttr('class');
+
+            //Get the string
+            var htmlString = element.eq(0).html();
+
+            return htmlString;
+        }
+
+        //////////////////////////////////////////////////
+
+        return controller;
+    });
 'use strict';
 
 
@@ -618,6 +667,10 @@ angular.module('fluro.util')
         singular: 'Query',
         plural: 'Queries',
         path: 'query',
+        columns: [{
+            title: 'Limit',
+            key: 'limit'
+        }]
     })
 
     controller.types.push({
@@ -756,6 +809,9 @@ angular.module('fluro.util')
         columns: [{
             title: 'Type',
             key: 'parentType'
+        },{
+            title: 'Machine Name',
+            key: 'definitionName'
         }, {
             title: 'Realms',
             key: 'realms',
