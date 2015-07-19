@@ -168,6 +168,276 @@ angular.module('fluro.util')
 
 
 });
+angular.module('fluro.util')
+.factory('ContentSelection', function() {
+
+    var ContentSelection = function() {
+
+        //keep track of this
+        var collection = this;
+        collection.items = [];
+        collection.multiInstance = false;
+        collection.trackValue = '_id';
+
+        ////////////////////////////////////////////////////
+
+        var _minimum = 0;
+        var _maximum = 0;
+
+        ////////////////////////////////////////////////////
+
+        //Item or ID
+        collection.contains = function(item) {
+            var id = item;
+
+            //Checking if an object is in the collection
+            if (_.isObject(item)) {
+
+                //Check if the item has a track value
+                if (item.hasOwnProperty(collection.trackValue)) {
+                    id = item[collection.trackValue];
+                } else {
+                    //Key is undefined on object
+                    console.log('Undefined track value: ', collection.trackValue, 'For item', item);
+                    return true;
+                }
+            }
+
+            var result = _.any(collection.items, function(existingItem) {
+
+                if (_.isObject(existingItem)) {
+                    if (existingItem.hasOwnProperty(collection.trackValue)) {
+                        return existingItem[collection.trackValue] == id;
+                    } else {
+                        return existingItem;
+                    }
+                } else {
+                    return existingItem == id;
+                }
+            });
+
+
+
+            return result;
+        }
+
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+
+        //Item or ID
+        collection.toggle = function(item) {
+            //Check if this item is already selected
+            var alreadySelected = collection.contains(item);
+
+            if (alreadySelected) {
+                collection.remove(item);
+            } else {
+                collection.add(item);
+            }
+        }
+
+
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+
+        //Item or ID
+        collection.add = function(item) {
+
+
+            if (_.isObject(item)) {
+                //If the item does not have the track value
+                if (!item.hasOwnProperty(collection.trackValue)) {
+                    console.log('Track value ' + "'" + collection.trackValue + "'" + ' Not found on proposed item', item)
+                    return;
+                }
+            }
+
+            if (collection.contains(item)) {
+                if (!collection.multiInstance) {
+                    console.log('Only allowed one instance of item', item)
+                    //Stop here because we are only allowed one instance of each item
+                    return;
+                }
+            }
+
+
+
+
+            //If we are already at the maximum
+            if (_maximum) {
+                if (collection.items.length >= _maximum) {
+                    if (_maximum == 1) {
+                        collection.only(item);
+                    }
+                    //We have hit the limit already
+                    return;
+                }
+            }
+
+            collection.items.push(item);
+            return true;
+        }
+
+        ////////////////////////////////////////////////////
+
+        collection.removeDuplicates = function() {
+
+            //Only keep unique values
+            collection.items = _.uniq(collection.items, function(item) {
+
+                if (_.isObject(item)) {
+                    if (item.hasOwnProperty(collection.trackValue)) {
+                        return item[collection.trackValue];
+                    } else {
+                        return item;
+                    }
+                } else {
+                    return item;
+                }
+            });
+        }
+
+        ////////////////////////////////////////////////////
+
+        collection.addMultiple = function(array) {
+
+            //Add the items to our collection
+            collection.items = collection.items.concat(array);
+
+            if (!collection.multiInstance) {
+                collection.removeDuplicates();
+            }
+        }
+
+        //////////////////////////////////////////////
+
+        collection.only = function(item) {
+            collection.items.length = 0;
+            collection.add(item);
+        }
+
+        ////////////////////////////////////////////////////
+
+        collection.onlyMultiple = function(items) {
+            collection.items = items;
+
+            if (!collection.multiInstance) {
+                collection.removeDuplicates();
+            }
+        }
+
+        ////////////////////////////////////////////////////
+
+        //Item or ID
+        collection.remove = function(item) {
+
+            var id = item;
+            if (_.isObject(item)) {
+                id = item[collection.trackValue];
+            }
+
+            _.remove(collection.items, function(existingItem) {
+
+                if (_.isObject(existingItem)) {
+                    if (existingItem.hasOwnProperty(collection.trackValue)) {
+                        return (existingItem[collection.trackValue] == id);
+                    } else {
+                        return existingItem == id;
+                    }
+                } else {
+                    return existingItem == id;
+                }
+            });
+        }
+
+        //////////////////////////////////////////////
+
+        collection.removeMultiple = function(array) {
+
+            _.remove(collection.items, function(existingItem) {
+               return _.contains(array, existingItem);
+            })
+        }
+
+        //////////////////////////////////////////////
+
+        Object.defineProperty(collection, 'ids', {
+
+            get: function() {
+
+                return _.map(collection.items, function(item) {
+
+                    if (_.isObject(item)) {
+                        if (item.hasOwnProperty('_id')) {
+                            return item._id;
+                        } else {
+                            return item;
+                        }
+                    } else {
+                        return item;
+                    }
+                })
+            }
+        });
+
+        //////////////////////////////////////////////
+
+        collection.clear = function() {
+            collection.items.length = 0;
+        }
+
+        //////////////////////////////////////////////
+
+        Object.defineProperty(collection, 'length', {
+            get: function() {
+                return collection.items.length;
+            }
+        });
+
+
+        //////////////////////////////////////////////
+
+        Object.defineProperty(collection, 'minimum', {
+            get: function() {
+                return _minimum;
+            },
+            set: function(m) {
+                _minimum = m;
+            }
+        });
+
+        //////////////////////////////////////////////
+
+        Object.defineProperty(collection, 'maximum', {
+            get: function() {
+                return _maximum;
+            },
+            set: function(m) {
+                //console.log('Set Maximum to ', m)
+                _maximum = m;
+            }
+        });
+
+        //////////////////////////////////////////////
+
+        collection.set = function(array) {
+            collection.items = array;
+        }
+
+        //////////////////////////////////////////////
+        //////////////////////////////////////////////
+        //////////////////////////////////////////////
+        //////////////////////////////////////////////
+        //////////////////////////////////////////////
+        //////////////////////////////////////////////
+
+        //Return the instance
+        return collection;
+    }
+
+    return Collection;
+
+});
 
 'use strict';
 
@@ -437,6 +707,80 @@ angular.module('fluro.util')
 
         return controller;
     });
+angular.module('fluro.util')
+.factory('ObjectSelection', function() {
+
+    var ObjectSelection = function() {
+
+        var controller = {
+        	items:[],
+        	item:null,
+        }
+       
+
+        //////////////////////////////////
+        controller.multiple = true;
+        controller.minimum = 0;
+        controller.maximum = 0;
+
+        //////////////////////////////////
+
+        controller.select = function(item) {
+            if (controller.multiple) {
+                if (!_.contains(controller.items, item)) {
+                    controller.items.push(item);
+                }
+            } else {
+                controller.item = item;
+            }
+        }
+
+        //////////////////////////////////
+
+        controller.deselect = function(item) {
+            if (controller.multiple) {
+                _.pull(controller.items, item);
+            } else {
+            	controller.item = null;
+            }
+        }
+
+        //////////////////////////////////
+
+        controller.toggle = function(item) {
+        	if (controller.multiple) {
+	            if (_.contains(controller.items, item)) {
+	                controller.deselect(item);
+	            } else {
+	                controller.select(item);
+	            }
+	        } else {
+	        	if(controller.item == item) {
+	        		controller.item = null;
+	        	} else {
+	        		controller.item = item;
+	        	}
+	        }
+        }
+
+        //////////////////////////////////
+
+        controller.contains = function(item) {
+        	if(controller.multiple) {
+            	return _.contains(controller.items, item)
+        	} else {
+            	return controller.item == item;
+        	}
+        }
+
+        //////////////////////////////////
+
+        return controller;
+    }
+
+    return ObjectSelection;
+
+});
 'use strict';
 
 
@@ -1107,9 +1451,14 @@ angular.module('fluro.util')
 
     controller.sideLoadDefinition = function(definition) {
         if(controller.definedTypes) {
-            console.log('Side loaded', definition)
-            controller.definedTypes.push(definition);
-            controller.refreshMenuTree();
+
+            var exists = _.some(controller.definedTypes, {_id:definition._id});
+            if(!exists) {
+                console.log('Side loaded', definition)
+                controller.definedTypes.push(definition);
+                controller.refreshMenuTree();
+            }
+            
         }
     }
 
