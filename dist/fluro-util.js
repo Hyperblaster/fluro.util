@@ -174,10 +174,10 @@ angular.module('fluro.util')
     var ContentSelection = function() {
 
         //keep track of this
-        var collection = this;
-        collection.items = [];
-        collection.multiInstance = false;
-        collection.trackValue = '_id';
+        var controller = this;
+        controller.items = [];
+        controller.multiInstance = false;
+        controller.trackValue = '_id';
 
         ////////////////////////////////////////////////////
 
@@ -187,27 +187,27 @@ angular.module('fluro.util')
         ////////////////////////////////////////////////////
 
         //Item or ID
-        collection.contains = function(item) {
+        controller.contains = function(item) {
             var id = item;
 
-            //Checking if an object is in the collection
+            //Checking if an object is in the controller
             if (_.isObject(item)) {
 
                 //Check if the item has a track value
-                if (item.hasOwnProperty(collection.trackValue)) {
-                    id = item[collection.trackValue];
+                if (item.hasOwnProperty(controller.trackValue)) {
+                    id = item[controller.trackValue];
                 } else {
                     //Key is undefined on object
-                    console.log('Undefined track value: ', collection.trackValue, 'For item', item);
+                    console.log('Undefined track value: ', controller.trackValue, 'For item', item);
                     return true;
                 }
             }
 
-            var result = _.any(collection.items, function(existingItem) {
+            var result = _.any(controller.items, function(existingItem) {
 
                 if (_.isObject(existingItem)) {
-                    if (existingItem.hasOwnProperty(collection.trackValue)) {
-                        return existingItem[collection.trackValue] == id;
+                    if (existingItem.hasOwnProperty(controller.trackValue)) {
+                        return existingItem[controller.trackValue] == id;
                     } else {
                         return existingItem;
                     }
@@ -225,14 +225,14 @@ angular.module('fluro.util')
         ////////////////////////////////////////////////////
 
         //Item or ID
-        collection.toggle = function(item) {
+        controller.toggle = function(item) {
             //Check if this item is already selected
-            var alreadySelected = collection.contains(item);
+            var alreadySelected = controller.contains(item);
 
             if (alreadySelected) {
-                collection.remove(item);
+                controller.remove(item);
             } else {
-                collection.add(item);
+                controller.add(item);
             }
         }
 
@@ -241,19 +241,19 @@ angular.module('fluro.util')
         ////////////////////////////////////////////////////
 
         //Item or ID
-        collection.add = function(item) {
+        controller.add = function(item) {
 
 
             if (_.isObject(item)) {
                 //If the item does not have the track value
-                if (!item.hasOwnProperty(collection.trackValue)) {
-                    console.log('Track value ' + "'" + collection.trackValue + "'" + ' Not found on proposed item', item)
+                if (!item.hasOwnProperty(controller.trackValue)) {
+                    console.log('Track value ' + "'" + controller.trackValue + "'" + ' Not found on proposed item', item)
                     return;
                 }
             }
 
-            if (collection.contains(item)) {
-                if (!collection.multiInstance) {
+            if (controller.contains(item)) {
+                if (!controller.multiInstance) {
                     console.log('Only allowed one instance of item', item)
                     //Stop here because we are only allowed one instance of each item
                     return;
@@ -265,29 +265,29 @@ angular.module('fluro.util')
 
             //If we are already at the maximum
             if (_maximum) {
-                if (collection.items.length >= _maximum) {
+                if (controller.items.length >= _maximum) {
                     if (_maximum == 1) {
-                        collection.only(item);
+                        controller.only(item);
                     }
                     //We have hit the limit already
                     return;
                 }
             }
 
-            collection.items.push(item);
+            controller.items.push(item);
             return true;
         }
 
         ////////////////////////////////////////////////////
 
-        collection.removeDuplicates = function() {
+        controller.removeDuplicates = function() {
 
             //Only keep unique values
-            collection.items = _.uniq(collection.items, function(item) {
+            controller.items = _.uniq(controller.items, function(item) {
 
                 if (_.isObject(item)) {
-                    if (item.hasOwnProperty(collection.trackValue)) {
-                        return item[collection.trackValue];
+                    if (item.hasOwnProperty(controller.trackValue)) {
+                        return item[controller.trackValue];
                     } else {
                         return item;
                     }
@@ -299,48 +299,48 @@ angular.module('fluro.util')
 
         ////////////////////////////////////////////////////
 
-        collection.addMultiple = function(array) {
+        controller.addMultiple = function(array) {
 
-            //Add the items to our collection
-            collection.items = collection.items.concat(array);
+            //Add the items to our controller
+            controller.items = controller.items.concat(array);
 
-            if (!collection.multiInstance) {
-                collection.removeDuplicates();
+            if (!controller.multiInstance) {
+                controller.removeDuplicates();
             }
         }
 
         //////////////////////////////////////////////
 
-        collection.only = function(item) {
-            collection.items.length = 0;
-            collection.add(item);
+        controller.only = function(item) {
+            controller.items.length = 0;
+            controller.add(item);
         }
 
         ////////////////////////////////////////////////////
 
-        collection.onlyMultiple = function(items) {
-            collection.items = items;
+        controller.onlyMultiple = function(items) {
+            controller.items = items;
 
-            if (!collection.multiInstance) {
-                collection.removeDuplicates();
+            if (!controller.multiInstance) {
+                controller.removeDuplicates();
             }
         }
 
         ////////////////////////////////////////////////////
 
         //Item or ID
-        collection.remove = function(item) {
+        controller.remove = function(item) {
 
             var id = item;
             if (_.isObject(item)) {
-                id = item[collection.trackValue];
+                id = item[controller.trackValue];
             }
 
-            _.remove(collection.items, function(existingItem) {
+            _.remove(controller.items, function(existingItem) {
 
                 if (_.isObject(existingItem)) {
-                    if (existingItem.hasOwnProperty(collection.trackValue)) {
-                        return (existingItem[collection.trackValue] == id);
+                    if (existingItem.hasOwnProperty(controller.trackValue)) {
+                        return (existingItem[controller.trackValue] == id);
                     } else {
                         return existingItem == id;
                     }
@@ -352,20 +352,20 @@ angular.module('fluro.util')
 
         //////////////////////////////////////////////
 
-        collection.removeMultiple = function(array) {
+        controller.removeMultiple = function(array) {
 
-            _.remove(collection.items, function(existingItem) {
+            _.remove(controller.items, function(existingItem) {
                return _.contains(array, existingItem);
             })
         }
 
         //////////////////////////////////////////////
 
-        Object.defineProperty(collection, 'ids', {
+        Object.defineProperty(controller, 'ids', {
 
             get: function() {
 
-                return _.map(collection.items, function(item) {
+                return _.map(controller.items, function(item) {
 
                     if (_.isObject(item)) {
                         if (item.hasOwnProperty('_id')) {
@@ -382,22 +382,22 @@ angular.module('fluro.util')
 
         //////////////////////////////////////////////
 
-        collection.clear = function() {
-            collection.items.length = 0;
+        controller.clear = function() {
+            controller.items.length = 0;
         }
 
         //////////////////////////////////////////////
 
-        Object.defineProperty(collection, 'length', {
+        Object.defineProperty(controller, 'length', {
             get: function() {
-                return collection.items.length;
+                return controller.items.length;
             }
         });
 
 
         //////////////////////////////////////////////
 
-        Object.defineProperty(collection, 'minimum', {
+        Object.defineProperty(controller, 'minimum', {
             get: function() {
                 return _minimum;
             },
@@ -408,7 +408,7 @@ angular.module('fluro.util')
 
         //////////////////////////////////////////////
 
-        Object.defineProperty(collection, 'maximum', {
+        Object.defineProperty(controller, 'maximum', {
             get: function() {
                 return _maximum;
             },
@@ -420,8 +420,8 @@ angular.module('fluro.util')
 
         //////////////////////////////////////////////
 
-        collection.set = function(array) {
-            collection.items = array;
+        controller.set = function(array) {
+            controller.items = array;
         }
 
         //////////////////////////////////////////////
@@ -432,10 +432,10 @@ angular.module('fluro.util')
         //////////////////////////////////////////////
 
         //Return the instance
-        return collection;
+        return controller;
     }
 
-    return Collection;
+    return ContentSelection;
 
 });
 
