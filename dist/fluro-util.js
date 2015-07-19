@@ -698,8 +698,6 @@ angular.module('fluro.util')
 
             //Get the string
             var htmlString = element.eq(0).html();
-
-            console.log('Sanitize', htmlString);
             return htmlString;
         }
 
