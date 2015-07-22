@@ -1040,11 +1040,6 @@ angular.module('fluro.util')
         plural: 'Teams',
         path: 'team',
         columns: [{
-            title: 'Contacts',
-            key: 'assignments.contacts',
-            renderer: 'multi'
-
-        }, {
             title: 'Realms',
             key: 'realms',
             renderer: 'multi'
