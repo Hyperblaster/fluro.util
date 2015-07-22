@@ -1036,6 +1036,18 @@ angular.module('fluro.util')
     })
 
     controller.types.push({
+        singular: 'Team',
+        plural: 'Teams',
+        path: 'team',
+    })
+
+    controller.types.push({
+        singular: 'Plan',
+        plural: 'Plans',
+        path: 'plan',
+    })
+
+    controller.types.push({
         singular: 'Code',
         plural: 'Code',
         path: 'code',
@@ -1505,6 +1517,8 @@ angular.module('fluro.util')
     ///////////////////
 
     controller.sideLoadDefinition = function(definition) {
+
+        console.log('Side Load Definition', definition)
         if(controller.definedTypes) {
 
             var exists = _.some(controller.definedTypes, {_id:definition._id});
