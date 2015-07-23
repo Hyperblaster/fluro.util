@@ -1044,6 +1044,11 @@ angular.module('fluro.util')
             key: 'realms',
             renderer: 'multi'
 
+        },{
+            title: 'Tags',
+            key: 'tags',
+            renderer: 'multi'
+
         }],
         filters: [{
             title: 'Team members',
@@ -1064,16 +1069,22 @@ angular.module('fluro.util')
         plural: 'Plans',
         path: 'plan',
         columns: [{
+            title: 'Event',
+            key: 'event',
+        },{
             title: 'Realms',
             key: 'realms',
             renderer: 'multi'
 
-        },
-        {
+        }, {
             title: 'Tags',
             key: 'tags',
             renderer: 'multi'
 
+        }],
+        filters: [{
+            title: 'Event',
+            key: 'event'
         }]
     })
 
