@@ -1063,6 +1063,18 @@ angular.module('fluro.util')
         singular: 'Plan',
         plural: 'Plans',
         path: 'plan',
+        columns: [{
+            title: 'Realms',
+            key: 'realms',
+            renderer: 'multi'
+
+        },
+        {
+            title: 'Tags',
+            key: 'tags',
+            renderer: 'multi'
+
+        }]
     })
 
     controller.types.push({
