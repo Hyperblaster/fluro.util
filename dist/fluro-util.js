@@ -1081,6 +1081,12 @@ angular.module('fluro.util')
             key: 'tags',
             renderer: 'multi'
 
+        },
+        {
+            title: 'Date',
+            key: 'startDate',
+            renderer: 'readableDate'
+
         }],
         filters: [{
             title: 'Event',
