@@ -1085,7 +1085,7 @@ angular.module('fluro.util')
         {
             title: 'Date',
             key: 'startDate',
-            renderer: 'readableDate'
+            renderer: 'date'
 
         }],
         filters: [{
