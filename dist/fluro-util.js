@@ -1068,9 +1068,21 @@ angular.module('fluro.util')
         singular: 'Plan',
         plural: 'Plans',
         path: 'plan',
-        columns: [{
+        columns: [
+        /*{
             title: 'Event',
             key: 'event',
+        },
+        */
+        {
+            title: 'Time',
+            key: 'startDate',
+            renderer: 'time'
+        },
+        {
+            title: 'Date',
+            key: 'startDate',
+            renderer: 'date'
         },{
             title: 'Realms',
             key: 'realms',
@@ -1081,13 +1093,8 @@ angular.module('fluro.util')
             key: 'tags',
             renderer: 'multi'
 
-        },
-        {
-            title: 'Date',
-            key: 'startDate',
-            renderer: 'date'
-
-        }],
+        }
+        ],
         filters: [{
             title: 'Event',
             key: 'event'
