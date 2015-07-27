@@ -1318,11 +1318,18 @@ angular.module('fluro.util')
         singular: 'User',
         plural: 'Users',
         path: 'user',
-        columns: [{
+        columns: [
+        /*{
             title: 'Roles',
             key: 'permissionSets',
             renderer: 'permissionSet',
-        }, {
+        }, 
+        */
+       {
+            title: 'Permission Policies',
+            key: 'policies'
+        },
+       {
             title: 'Realm',
             key: 'realms'
         }, {
