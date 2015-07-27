@@ -1328,6 +1328,10 @@ angular.module('fluro.util')
         }, {
             title: 'Status',
             key: 'status'
+        }],
+        filters: [{
+            title: 'Policies',
+            key: 'policies'
         }]
     })
 
