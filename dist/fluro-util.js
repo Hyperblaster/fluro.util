@@ -1325,6 +1325,11 @@ angular.module('fluro.util')
             title: 'Permission Policies',
             key: 'policies'
         },
+        {
+            title: 'Extra permissions',
+            key: 'permissionSets',
+            renderer: 'permissionSet',
+        },
        {
             title: 'Realm',
             key: 'realms'
