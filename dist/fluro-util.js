@@ -594,7 +594,7 @@ angular.module('fluro.util')
         // console.log('Get Asset URL', id)
         var url = Fluro.apiURL + '/get/' + id;
 
-        if (Fluro.token) {
+        if(Fluro.token) {
             url += '?access_token=' + Fluro.token;
         }
 
@@ -607,7 +607,7 @@ angular.module('fluro.util')
         // console.log('Get Asset URL', id)
         var url = Fluro.apiURL + '/get/' + id + '?w=50';
 
-        if (Fluro.token) {
+        if(Fluro.token) {
             url += '?access_token=' + Fluro.token;
         }
         
@@ -622,15 +622,15 @@ angular.module('fluro.util')
 
         var limitWidth = 1200;
 
-        if ($window.screen.width <= 768) {
+        if($window.screen.width <= 768) {
             limitWidth = 768;
         }
 
-        if ($window.screen.width <= 320) {
+        if($window.screen.width <= 320) {
             limitWidth = 320;
         }
 
-        if (!w && !h) {
+        if(!w && !h) {
             url += '&w=' + limitWidth;
         } else {
 
