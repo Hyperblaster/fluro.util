@@ -604,7 +604,14 @@ angular.module('fluro.util')
     /////////////////////////////////////////////////////
 
     controller.thumbnailUrl = function(id) {
-        return controller.imageUrl(id, 50);
+        // console.log('Get Asset URL', id)
+        var url = Fluro.apiURL + '/get/' + id + '?w=50';
+
+        if (Fluro.token) {
+            url += '?access_token=' + Fluro.token;
+        }
+        
+        return url;
     }
 
     //////////////////////////////////////////////////
