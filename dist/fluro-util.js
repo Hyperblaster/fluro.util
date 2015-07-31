@@ -116,11 +116,7 @@ angular.module('fluro.util')
             return $sce.trustAsHtml(text);
         };
     }
-]);
-
-
-
-angular.module('fluro.util')
+])
 .filter('trustedResource', ['$sce',
     function($sce) {
         return function(url) {
@@ -594,13 +590,12 @@ angular.module('fluro.util')
 
     /////////////////////////////////////////////////////
    
-   controller.url =
     controller.getUrl = function(id) {
         // console.log('Get Asset URL', id)
         var url = Fluro.apiURL + '/get/' + id;
 
         if (Fluro.token) {
-            url += '&access_token=' + Fluro.token;
+            url += '?access_token=' + Fluro.token;
         }
 
         return url;
@@ -656,7 +651,7 @@ angular.module('fluro.util')
         var url = Fluro.apiURL + '/download/' + id;
 
         if (Fluro.token) {
-            url += '&access_token=' + Fluro.token;
+            url += '?access_token=' + Fluro.token;
         }
 
         return url;
