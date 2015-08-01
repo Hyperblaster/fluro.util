@@ -1063,6 +1063,12 @@ angular.module('fluro.util')
     })
 
     controller.types.push({
+        singular: 'Reaction',
+        plural: 'Reactions',
+        path: 'reaction',
+    })
+
+    controller.types.push({
         singular: 'Policy',
         plural: 'Permission Policies',
         path: 'policy',
