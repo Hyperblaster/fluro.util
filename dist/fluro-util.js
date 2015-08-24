@@ -453,17 +453,16 @@ angular.module('fluro.util')
     return ContentSelection;
 
 });
-
 'use strict';
 
 
 angular.module('fluro.util')
 
 
-.filter('formatDate', function(){
-  return function(dateString, format){
-    return new Date(dateString).format(format)
-  };
+.filter('formatDate', function() {
+    return function(dateString, format) {
+        return new Date(dateString).format(format)
+    };
 })
 
 
@@ -497,15 +496,15 @@ angular.module('fluro.util')
             var checkTimestamp = date.getTime();
             var startTimestamp = startDate.getTime();
             var endTimestamp = endDate.getTime();
-            
+
             switch (style) {
                 case 'upcoming':
-                    if(checkTimestamp <= startTimestamp || checkTimestamp <= endTimestamp) {
+                    if (checkTimestamp <= startTimestamp || checkTimestamp <= endTimestamp) {
                         results.push(item);
                     }
                     break;
                 default:
-                    if(checkTimestamp >= startTimestamp && checkTimestamp <= endTimestamp) {
+                    if (checkTimestamp >= startTimestamp && checkTimestamp <= endTimestamp) {
                         results.push(item)
                     }
                     break;
@@ -519,9 +518,31 @@ angular.module('fluro.util')
 })
 
 
-.factory('DateTools', function() {
+.service('DateTools', function() {
 
     var controller = {};
+
+    ///////////////////////////////////////
+
+    controller.calculateAge = function(d) {
+        var today = new Date();
+        var birthDate = new Date(d);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+
+    }
+
+    ///////////////////////////////////////
+
+    controller.expired = function(d) {
+        var today = new Date();
+        var checkDate = new Date(d);
+        return today > checkDate;
+    }
 
     ///////////////////////////////////////
 
@@ -536,11 +557,11 @@ angular.module('fluro.util')
     controller.readableDateRange = function(startDate, endDate) {
 
 
-        if(!_.isDate(startDate)) {
+        if (!_.isDate(startDate)) {
             startDate = new Date(startDate);
         }
 
-        if(!_.isDate(endDate)) {
+        if (!_.isDate(endDate)) {
             endDate = new Date(endDate);
         }
 
