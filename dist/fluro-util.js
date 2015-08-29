@@ -1127,8 +1127,12 @@ angular.module('fluro.util')
             key: 'contact'
         },
         {
+            title: 'Checked in',
+            key: 'created'
+        },
+        {
             title: 'Checked out',
-            key: 'checkout'
+            key: 'checkout.date'
         }],
     })
 
