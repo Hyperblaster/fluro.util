@@ -1287,7 +1287,10 @@ angular.module('fluro.util')
         }, {
             title: 'Gender',
             key: 'gender'
-        }],
+        }, {
+            title: 'Family',
+            key: 'family'
+        },],
         filters: [{
             title: 'Gender',
             key: 'gender'
