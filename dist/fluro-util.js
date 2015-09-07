@@ -1119,7 +1119,10 @@ angular.module('fluro.util')
         singular: 'Family',
         plural: 'Families',
         path: 'family',
-        columns: [],
+        columns: [{
+            title: 'Names',
+            key: 'firstLine'
+        }],
     })
 
     controller.types.push({
