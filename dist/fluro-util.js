@@ -189,7 +189,7 @@ angular.module('fluro.util')
     //////////////////////////////////////////////////
     
     controller.clear = function(type) {
-        console.log('Clear', type, 'cache');
+       // console.log('Clear', type, 'cache');
         
         var cache = $cacheFactory.get(type +'-list');
         if(cache) {
@@ -201,9 +201,9 @@ angular.module('fluro.util')
     //////////////////////////////////////////////////
     
     controller.clearAll = function() {
-        console.log('Clear all caches')
+       // console.log('Clear all caches')
         _.each(_caches, function(cache) {
-            console.log('Clearing cache', cache);
+            //console.log('Clearing cache', cache);
             cache.removeAll();
         })
     }
