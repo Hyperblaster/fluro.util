@@ -1144,7 +1144,7 @@ angular.module('fluro.util')
         },
         {
             title: 'Checked out',
-            key: 'checkout.date',
+            key: 'checkout[0].date',
             filter:'date'
         }],
     })
