@@ -1137,15 +1137,21 @@ angular.module('fluro.util')
             title: 'Contact',
             key: 'contact'
         },
+        
         {
-            title: 'Checked in',
+            title: 'Check in date',
             key: 'created',
-            renderer:'datetime'
+            renderer:'date'
+        },
+        {
+            title: 'Checked in time',
+            key: 'created',
+            renderer:'time'
         },
         {
             title: 'Checked out',
             key: 'checkout.date',
-            renderer:'datetime'
+            renderer:'time'
         }],
     })
 
