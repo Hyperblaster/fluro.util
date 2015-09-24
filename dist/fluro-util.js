@@ -1335,6 +1335,21 @@ angular.module('fluro.util')
     })
 
     controller.types.push({
+        singular: 'Details',
+        plural: 'Details',
+        path: 'contactdetails',
+        columns: [{
+            title: 'First Name',
+            key: 'contact.firstName'
+        }, {
+            title: 'Last Name',
+            key: 'contact.lastName'
+        }]
+    })
+
+
+
+    controller.types.push({
         singular: 'Purchase',
         plural: 'Purchases',
         path: 'purchase',
