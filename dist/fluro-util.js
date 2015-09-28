@@ -1217,17 +1217,20 @@ angular.module('fluro.util')
             renderer: 'multi'
 
         }],
-        filters: [{
+        filters: [
+        /**
+        {
             title: 'Team members',
             key: 'assignments.contacts'
         },
+        /**/
         {
             title: 'Title',
             key: 'title'
         },
         {
             title: 'Assignment count',
-            key: 'assignments.length'
+            key: 'assignments'
         }]
     })
 
