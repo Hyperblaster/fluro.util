@@ -1228,11 +1228,13 @@ angular.module('fluro.util')
             title: 'Title',
             key: 'title'
         },
-         /**/
+
         {
             title: 'Assignment count',
             key: 'assignments'
-        }]
+        }
+        /**/
+        ]
     })
 
     controller.types.push({
