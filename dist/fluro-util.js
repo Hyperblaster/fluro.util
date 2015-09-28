@@ -1223,11 +1223,12 @@ angular.module('fluro.util')
             title: 'Team members',
             key: 'assignments.contacts'
         },
-        /**/
+       
         {
             title: 'Title',
             key: 'title'
         },
+         /**/
         {
             title: 'Assignment count',
             key: 'assignments'
