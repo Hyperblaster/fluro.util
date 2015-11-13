@@ -1150,6 +1150,12 @@ angular.module('fluro.util')
     })
 
     controller.types.push({
+        singular: 'Process',
+        plural: 'Processes',
+        path: 'process',
+    })
+
+    controller.types.push({
         singular: 'Checkin',
         plural: 'Checkins',
         path: 'checkin',
@@ -1242,11 +1248,14 @@ angular.module('fluro.util')
         plural: 'Plans',
         path: 'plan',
         columns: [
-        /*{
+        /**  
+        {
+
             title: 'Event',
             key: 'event',
+            renderer: 'multi'
         },
-        */
+        /**/
         {
             title: 'Time',
             key: 'startDate',
