@@ -1663,6 +1663,15 @@ angular.module('fluro.util')
             renderer: 'multi',
         },
         {
+            title: 'Dimensions',
+            renderer: 'dimensions',
+        },
+        {
+            title: 'Size',
+            key: 'filesize',
+            renderer: 'filesize',
+        },
+        {
             title: 'Realms',
             key: 'realms',
             renderer: 'multi',
@@ -1683,10 +1692,16 @@ angular.module('fluro.util')
             title: 'File Type',
             key: 'extension'
         }, {
+            title: 'Size',
+            key: 'filesize',
+            renderer: 'filesize',
+        },
+        {
             title: 'Realms',
             key: 'realms',
             renderer: 'multi',
-        }, ],
+        },
+        ],
         filters: [{
             title: 'File Type',
             key: 'extension'
@@ -1705,6 +1720,9 @@ angular.module('fluro.util')
             key: 'extension'
         }, ],
         filter: [{
+            title: 'File Type',
+            key: 'extension'
+        }, {
             title: 'Asset Type',
             key: 'assetType'
         }],
