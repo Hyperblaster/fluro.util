@@ -1675,7 +1675,11 @@ angular.module('fluro.util')
             title: 'Realms',
             key: 'realms',
             renderer: 'multi',
-        }, ],
+        }, 
+        {
+            title: 'Privacy',
+            renderer: 'privacy',
+        }],
         filters: [{
             title: 'Asset Type',
             key: 'assetType'
@@ -1692,15 +1696,19 @@ angular.module('fluro.util')
             title: 'File Type',
             key: 'extension'
         }, {
-            title: 'Size',
-            key: 'filesize',
-            renderer: 'filesize',
+            title: 'Duration',
+            renderer: 'duration',
         },
         {
             title: 'Realms',
             key: 'realms',
             renderer: 'multi',
         },
+        {
+            title: 'Privacy',
+            renderer: 'privacy',
+        },
+        
         ],
         filters: [{
             title: 'File Type',
@@ -1718,7 +1726,19 @@ angular.module('fluro.util')
         columns: [{
             title: 'File Type',
             key: 'extension'
-        }, ],
+        }, {
+            title: 'Duration',
+            renderer: 'duration',
+        }, 
+        {
+            title: 'Realms',
+            key: 'realms',
+            renderer: 'multi',
+        },
+        {
+            title: 'Privacy',
+            renderer: 'privacy',
+        }],
         filter: [{
             title: 'File Type',
             key: 'extension'
