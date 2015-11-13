@@ -1678,6 +1678,7 @@ angular.module('fluro.util')
         }, 
         {
             title: 'Privacy',
+            key:'privacy',
             renderer: 'privacy',
         }],
         filters: [{
@@ -1697,7 +1698,7 @@ angular.module('fluro.util')
             key: 'extension'
         }, {
             title: 'Duration',
-            renderer: 'duration',
+            key:'duration',
         },
         {
             title: 'Realms',
@@ -1706,6 +1707,7 @@ angular.module('fluro.util')
         },
         {
             title: 'Privacy',
+            key:'privacy',
             renderer: 'privacy',
         },
         
@@ -1728,7 +1730,7 @@ angular.module('fluro.util')
             key: 'extension'
         }, {
             title: 'Duration',
-            renderer: 'duration',
+            key:'duration',
         }, 
         {
             title: 'Realms',
@@ -1737,6 +1739,7 @@ angular.module('fluro.util')
         },
         {
             title: 'Privacy',
+            key:'privacy',
             renderer: 'privacy',
         }],
         filter: [{
