@@ -1658,18 +1658,14 @@ angular.module('fluro.util')
         plural: 'Images',
         path: 'image',
         columns: [{
-            title: 'Tags',
-            key: 'tags',
-            renderer: 'multi',
-        },
-        {
             title: 'Dimensions',
+            key:'width',
             renderer: 'dimensions',
         },
         {
-            title: 'Size',
-            key: 'filesize',
-            renderer: 'filesize',
+            title: 'Tags',
+            key: 'tags',
+            renderer: 'multi',
         },
         {
             title: 'Realms',
@@ -1677,7 +1673,12 @@ angular.module('fluro.util')
             renderer: 'multi',
         }, 
         {
-            title: 'Privacy',
+            title: 'Size',
+            key: 'filesize',
+            renderer: 'filesize',
+        },
+        {
+            title: 'Security',
             key:'privacy',
             renderer: 'privacy',
         }],
@@ -1694,9 +1695,6 @@ angular.module('fluro.util')
         plural: 'Audio',
         path: 'audio',
         columns: [{
-            title: 'File Type',
-            key: 'extension'
-        }, {
             title: 'Duration',
             key:'duration',
         },
@@ -1706,7 +1704,11 @@ angular.module('fluro.util')
             renderer: 'multi',
         },
         {
-            title: 'Privacy',
+            title: 'File Type',
+            key: 'extension'
+        }, 
+        {
+            title: 'Security',
             key:'privacy',
             renderer: 'privacy',
         },
@@ -1738,7 +1740,7 @@ angular.module('fluro.util')
             renderer: 'multi',
         },
         {
-            title: 'Privacy',
+            title: 'Security',
             key:'privacy',
             renderer: 'privacy',
         }],
