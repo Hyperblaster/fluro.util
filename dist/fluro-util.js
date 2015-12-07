@@ -1150,9 +1150,9 @@ angular.module('fluro.util')
     })
 
     controller.types.push({
-        singular: 'Process',
-        plural: 'Processes',
-        path: 'process',
+        singular: 'Scheduled Task',
+        plural: 'Scheduled Tasks',
+        path: 'task',
     })
 
     controller.types.push({
