@@ -656,8 +656,9 @@ angular.module('fluro.util')
         var date = new Date(d);
 
         if (Fluro.timezone) {
+
             //Localized time
-            var hoursDifference = offset * 60 * 60 * 100;
+            var hoursDifference = Number(Fluro.timezone) * 60 * 60 * 100;
             return new Date(d.getTime() + hoursDifference);
         }
 
