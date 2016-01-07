@@ -677,8 +677,11 @@ angular.module('fluro.util')
             var hoursDifference = websiteOffset - viewerOffset;
             var offsetDifference = hoursDifference * 60 * 1000;
 
+
             //Adjust the date
             date.setTime(date.getTime() + offsetDifference);
+
+            console.log('Local time difference', offsetDifference);
         }
 
         return date;
