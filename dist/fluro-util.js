@@ -145,17 +145,20 @@ angular.module('fluro.util').filter('chunk', function() {
       return _.memoize(func);
 });
 
-angular.module('fluro.util').filter('formatDate', function(Fluro){
+angular.module('fluro.util').filter('formatDate', function(DateTools){
   return function(dateString, format){
 
-  	//Create the date object
-  	var date = new Date(dateString);
+  	// //Create the date object
+  	// var date = new Date(dateString);
 
-  	//If theres a timezone specified
-  	if(Fluro.timezone) {
-  		//Alter the date according to the timezone
-    	return date.format(format);
-  	} 
+  	// //If theres a timezone specified
+  	// if(Fluro.timezone) {
+  	// 	//Alter the date according to the timezone
+   //  	return 
+  	// } 
+  	
+  	//Get the Localized date
+  	var date = DateTools.localDate(dateString);
     
     //Return the date in the requested format
     return date.format(format);
@@ -550,8 +553,7 @@ angular.module('fluro.util')
 
 angular.module('fluro.util')
 
-
-.filter("matchDate", function() {
+.filter("matchDate", function(Fluro) {
 
     return function(items, dateString, style) {
 
@@ -562,19 +564,36 @@ angular.module('fluro.util')
             var startDate;
             var endDate;
 
+
+            ////////////////////////////////////////
+
             //Get the start of the day
             if (item.startDate) {
-                startDate = new Date(item.startDate);
+
+                if(Fluro.timezone) {
+                   startDate = controller.localDate(item.startDate);
+                } else {
+                    startDate = new Date(item.startDate);
+                }
                 startDate.setHours(0, 0, 0, 0);
             }
 
+            ////////////////////////////////////////
+
             //Get the start of the day
             if (item.endDate) {
-                endDate = new Date(item.endDate);
+                if(Fluro.timezone) {
+                   startDate = controller.localDate(item.endDate);
+                } else {
+                    startDate = new Date(item.endDate);
+                }
+               // endDate = new Date(item.endDate);
             }
 
             //Get the end of the day
             endDate.setHours(23, 59, 59, 999);
+
+            ////////////////////////////////////////
 
             //Turn into integers
             var checkTimestamp = date.getTime();
@@ -602,15 +621,25 @@ angular.module('fluro.util')
 })
 
 
-.service('DateTools', function() {
+.service('DateTools', function(Fluro) {
 
     var controller = {};
 
     ///////////////////////////////////////
 
     controller.calculateAge = function(d) {
-        var today = new Date();
-        var birthDate = new Date(d);
+        var today; //= new Date();
+        var birthDate;// = new Date(d);
+
+
+        if(Fluro.timezone) {
+            today = controller.localDate();
+            birthDate = controller.localDate(d);
+        } else {
+            today = new Date();
+            birthDate = new Date(d);
+        }
+
         var age = today.getFullYear() - birthDate.getFullYear();
         var m = today.getMonth() - birthDate.getMonth();
         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -622,9 +651,33 @@ angular.module('fluro.util')
 
     ///////////////////////////////////////
 
+    controller.localDate = function(d) {
+        //Date
+        var date = new Date(d);
+
+        if (Fluro.timezone) {
+            //Localized time
+            var hoursDifference = offset * 60 * 60 * 100;
+            return new Date(d.getTime() + hoursDifference);
+        }
+
+        return date;
+    }
+
+    ///////////////////////////////////////
+
     controller.expired = function(d) {
-        var today = new Date();
-        var checkDate = new Date(d);
+        var today;// = new Date();
+        var checkDate;// = new Date(d);
+
+        if(Fluro.timezone) {
+            today = controller.localDate();
+            checkDate = controller.localDate(d);
+        } else {
+            today = new Date();
+            checkDate = new Date(d);
+        }
+
         return today > checkDate;
     }
 
@@ -638,20 +691,42 @@ angular.module('fluro.util')
 
     ///////////////////////////////////////
 
-    controller.readableDateRange = function(startDate, endDate) {
+    controller.readableDateRange = function(startDate, endDate, options) {
 
+        if(!options) {
+            options = {};
+        }
+
+        //////////////////////////////////////////
 
         if (!_.isDate(startDate)) {
-            startDate = new Date(startDate);
+            if(Fluro.timezone) {
+                startDate = controller.localDate(startDate);
+            } else {
+                startDate = new Date(startDate);
+            }
         }
 
         if (!_.isDate(endDate)) {
-            endDate = new Date(endDate);
+            if(Fluro.timezone) {
+                endDate = controller.localDate(endDate);
+            } else {
+                endDate = new Date(endDate);
+            }
         }
 
+        //////////////////////////////////////////
 
+        var today;
 
-        var today = new Date();
+        if(Fluro.timezone) {
+            today = controller.localDate();
+        } else {
+            today = new Date();
+        }
+
+        //////////////////////////////////////////
+
         var string = '';
 
         //We have a range
@@ -676,8 +751,6 @@ angular.module('fluro.util')
                 }
             }
         }
-
-
 
         return string;
     }
