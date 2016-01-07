@@ -620,8 +620,8 @@ angular.module('fluro.util')
     };
 })
 
-
 .service('DateTools', function(Fluro) {
+
 
     var controller = {};
 
@@ -652,14 +652,33 @@ angular.module('fluro.util')
     ///////////////////////////////////////
 
     controller.localDate = function(d) {
-        //Date
-        var date = new Date(d);
 
+        //Date
+        var date;// = new Date(d);
+
+        if(!d) {
+            date = new Date();
+        } else {
+            date = new Date(d);
+        }
+        
         if (Fluro.timezone) {
 
+            //Timezone
+            var tz = Number(Fluro.timezone);
+
             //Localized time
-            var hoursDifference = Number(Fluro.timezone) * 60 * 60 * 100;
-            return new Date(date.getTime() + hoursDifference);
+            var websiteOffset = tz * 60;
+            var viewerOffset = (date.getTimezoneOffset() * -1); 
+
+            ///////////////////////////////////////////////////////////////
+
+            //Get the difference
+            var hoursDifference = websiteOffset - viewerOffset;
+            var offsetDifference = hoursDifference * 60 * 1000;
+
+            //Adjust the date
+            date.setTime(date.getTime() + offsetDifference);
         }
 
         return date;
