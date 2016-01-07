@@ -570,7 +570,7 @@ angular.module('fluro.util')
             //Get the start of the day
             if (item.startDate) {
 
-                if(Fluro.timezone) {
+                if(Fluro.timezoneOffset) {
                    startDate = controller.localDate(item.startDate);
                 } else {
                     startDate = new Date(item.startDate);
@@ -582,7 +582,7 @@ angular.module('fluro.util')
 
             //Get the start of the day
             if (item.endDate) {
-                if(Fluro.timezone) {
+                if(Fluro.timezoneOffset) {
                    startDate = controller.localDate(item.endDate);
                 } else {
                     startDate = new Date(item.endDate);
@@ -632,7 +632,7 @@ angular.module('fluro.util')
         var birthDate;// = new Date(d);
 
 
-        if(Fluro.timezone) {
+        if(Fluro.timezoneOffset) {
             today = controller.localDate();
             birthDate = controller.localDate(d);
         } else {
@@ -662,10 +662,10 @@ angular.module('fluro.util')
             date = new Date(d);
         }
         
-        if (Fluro.timezone) {
+        if (Fluro.timezoneOffset) {
 
             //Timezone
-            var tz = Number(Fluro.timezone);
+            var tz = Number(Fluro.timezoneOffset);
 
             //Localized time
             var websiteOffset = tz * 60;
@@ -693,7 +693,7 @@ angular.module('fluro.util')
         var today;// = new Date();
         var checkDate;// = new Date(d);
 
-        if(Fluro.timezone) {
+        if(Fluro.timezoneOffset) {
             today = controller.localDate();
             checkDate = controller.localDate(d);
         } else {
@@ -723,7 +723,7 @@ angular.module('fluro.util')
         //////////////////////////////////////////
 
         if (!_.isDate(startDate)) {
-            if(Fluro.timezone) {
+            if(Fluro.timezoneOffset) {
                 startDate = controller.localDate(startDate);
             } else {
                 startDate = new Date(startDate);
@@ -731,7 +731,7 @@ angular.module('fluro.util')
         }
 
         if (!_.isDate(endDate)) {
-            if(Fluro.timezone) {
+            if(Fluro.timezoneOffset) {
                 endDate = controller.localDate(endDate);
             } else {
                 endDate = new Date(endDate);
@@ -742,7 +742,7 @@ angular.module('fluro.util')
 
         var today;
 
-        if(Fluro.timezone) {
+        if(Fluro.timezoneOffset) {
             today = controller.localDate();
         } else {
             today = new Date();
