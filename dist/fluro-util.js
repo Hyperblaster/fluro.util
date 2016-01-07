@@ -659,7 +659,7 @@ angular.module('fluro.util')
 
             //Localized time
             var hoursDifference = Number(Fluro.timezone) * 60 * 60 * 100;
-            return new Date(d.getTime() + hoursDifference);
+            return new Date(date.getTime() + hoursDifference);
         }
 
         return date;
