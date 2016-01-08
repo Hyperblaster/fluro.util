@@ -620,12 +620,7 @@ angular.module('fluro.util')
     };
 })
 
-
-
-
-
-
-app.service('DateTools', function(Fluro) {
+.service('DateTools', function(Fluro) {
 
 
     var controller = {};
