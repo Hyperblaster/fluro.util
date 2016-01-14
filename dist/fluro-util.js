@@ -791,9 +791,16 @@ angular.module('fluro.util')
 
     /////////////////////////////////////////////////////
    
-    controller.getUrl = function(id) {
+    controller.getUrl = function(id, extension) {
+
+
         // console.log('Get Asset URL', id)
         var url = Fluro.apiURL + '/get/' + id;
+
+
+        if(extension) {
+            url += '/file/file.' + extension;
+        }
 
         if(Fluro.token) {
             url += '?access_token=' + Fluro.token;
