@@ -1251,6 +1251,22 @@ angular.module('fluro.util')
     return Playlist;
 
 });
+/**
+angular.module('fluro.util')
+.service('TypeService', function($q, Fluro, FluroContent, FluroAccess, TypeConfig, $resource) {
+
+
+	var controller = {};
+
+	////////////////////////////////////
+
+	controller.refresh = function() {
+
+	}
+
+});
+
+/**/
 angular.module('fluro.util')
 .provider('TypeConfig', function() {
 
@@ -1984,7 +2000,9 @@ angular.module('fluro.util')
         //}
 
         //Make a new request
-        controller.definedTypes = FluroContent.endpoint('defined', true, true).query();
+        controller.definedTypes = FluroContent.endpoint('defined', true, true).query({
+            allDefinitions:true,
+        });
 
         //Create the refresh request
         //controller.refreshRequest = true;
