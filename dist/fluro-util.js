@@ -1559,7 +1559,17 @@ angular.module('fluro.util')
         }, {
             title: 'Mode',
             key: 'mode'
-        }, ],
+        },
+        {
+            title: 'Date',
+            key: 'created',
+            renderer: 'date'
+        }, 
+        {
+            title: 'Realms',
+            key: 'realms',
+            renderer: 'multi'
+        }],
         filters: [{
             title: 'Payment Status',
             key: 'paymentStatus'
