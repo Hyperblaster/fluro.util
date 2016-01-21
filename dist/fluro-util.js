@@ -1563,12 +1563,12 @@ angular.module('fluro.util')
         {
             title: 'Date',
             key: 'created',
-            renderer: 'date'
+            renderer: 'datetime'
         }, 
         {
             title: 'Realms',
             key: 'realms',
-            renderer: 'multi'
+            renderer: 'realm'
         }],
         filters: [{
             title: 'Payment Status',
