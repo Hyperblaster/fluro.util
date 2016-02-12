@@ -793,7 +793,7 @@ angular.module('fluro.util')
 
     controller.getUrl = function(id, extension, params) {
 
-        if(!params) {
+        if (!params) {
             params = {};
         }
 
@@ -805,8 +805,12 @@ angular.module('fluro.util')
             url += '/file/file.' + extension;
         }
 
-        if (Fluro.token) {
-            url += '?access_token=' + Fluro.token;
+        // if (Fluro.token && !params.token) {
+        //     url += '?access_token=' + Fluro.token;
+        // }
+
+        if (Fluro.token && !params['access_token']) {
+            params['access_token'] = Fluro.token;
         }
 
         ////////////////////////////////////////
@@ -815,11 +819,11 @@ angular.module('fluro.util')
             return encodeURIComponent(k) + '=' + encodeURIComponent(v);
         }).join('&');
 
-        if(queryParams.length) {
-            url += queryParams;
+        if (queryParams.length) {
+            url += '?' + queryParams;
         }
 
-        return url ;
+        return url;
     }
 
     /////////////////////////////////////////////////////
@@ -843,8 +847,9 @@ angular.module('fluro.util')
             params = {};
         }
 
-        var url = Fluro.apiURL + '/get/' + _id + '?dimensions';
+        var url = Fluro.apiURL + '/get/' + _id; // + '?dimensions';
 
+        //////////////////////////////////////
 
         var limitWidth = 1920;
 
@@ -856,17 +861,26 @@ angular.module('fluro.util')
             limitWidth = 640;
         }
 
+        ////////////////////////////////////
         if (!w && !h) {
-            url += '&w=' + limitWidth;
+            //url += '&w=' + limitWidth;
+            params['w'] = limitWidth;
         } else {
 
             if (w) {
-                url += '&w=' + w;
+                // url += '&w=' + w;
+                params['w'] = w;
             }
 
             if (h) {
-                url += '&h=' + h;
+                //url += '&h=' + h;
+                params['h'] = h;
             }
+        }
+
+
+        if (Fluro.token && !params['access_token']) {
+            params['access_token'] = Fluro.token;
         }
 
 
@@ -874,14 +888,15 @@ angular.module('fluro.util')
             return encodeURIComponent(k) + '=' + encodeURIComponent(v);
         }).join('&');
 
-        if(queryParams.length) {
-            url += queryParams;
+
+        if (queryParams.length) {
+            url += '?' + queryParams;
         }
 
 
-        if (Fluro.token) {
-            url += '&access_token=' + Fluro.token;
-        }
+        // if (Fluro.token) {
+        //     url += '&access_token=' + Fluro.token;
+        // }
 
         return url;
     }
