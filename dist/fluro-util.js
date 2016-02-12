@@ -815,7 +815,11 @@ angular.module('fluro.util')
             return encodeURIComponent(k) + '=' + encodeURIComponent(v);
         }).join('&');
 
-        return url;
+        if(queryParams.length) {
+            url += queryParams;
+        }
+
+        return url ;
     }
 
     /////////////////////////////////////////////////////
@@ -869,6 +873,10 @@ angular.module('fluro.util')
         var queryParams = _.map(params, function(v, k) {
             return encodeURIComponent(k) + '=' + encodeURIComponent(v);
         }).join('&');
+
+        if(queryParams.length) {
+            url += queryParams;
+        }
 
 
         if (Fluro.token) {
