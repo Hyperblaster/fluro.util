@@ -664,15 +664,10 @@ angular.module('fluro.util')
 
         ///////////////////////////////////////////
 
-        
-
         var timezoneOffset;
         var browserOffset = date.getTimezoneOffset();
 
-
-        // if (Fluro.timezoneOffset) {
-        //     timezoneOffset = timezoneOffset;
-        // }
+        ///////////////////////////////////////////
 
         if(Fluro.timezone) {
             timezoneOffset = moment.tz(date, Fluro.timezone).utcOffset();
@@ -685,38 +680,8 @@ angular.module('fluro.util')
 
 
             date.setTime(date.getTime() + offsetDifference);
-
-
-            console.log(difference, prevDate, date);
             //console.log('TIMEZONE', timezoneOffset, browserOffset, timezoneOffset - browserOffset, 'hours');
         }
-
-        ///////////////////////////////////////////
-
-        /**
-        if (timezoneOffset) {
-
-            //Timezone
-            //var tz = Number(Fluro.timezoneOffset);
-
-            //Localized time
-            var websiteOffset = timezoneOffset;
-            var viewerOffset = (browserOffset * -1); 
-
-            ///////////////////////////////////////////////////////////////
-
-            //Get the difference
-            var hoursDifference = websiteOffset - viewerOffset;
-            var offsetDifference = hoursDifference * 60 * 1000;
-
-            //console.log('Hours Difference', hoursDifference, websiteOffset, viewerOffset)
-            //console.log('Offset Difference', offsetDifference, timezoneOffset, browserOffset, new Date(date.getTime()), new Date(date.getTime() + offsetDifference));
-            //Adjust the date
-            date.setTime(date.getTime() + offsetDifference);
-
-            //console.log('Local time difference', Fluro.timezoneOffset, offsetDifference);
-        }
-        /**/
 
         return date;
     }
