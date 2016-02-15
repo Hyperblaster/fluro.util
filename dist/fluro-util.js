@@ -667,6 +667,7 @@ angular.module('fluro.util')
         
 
         var timezoneOffset;
+        var browserOffset = date.getTimezoneOffset();
 
 
         if (Fluro.timezoneOffset) {
@@ -675,8 +676,7 @@ angular.module('fluro.util')
 
         if(Fluro.timezone) {
             timezoneOffset = moment.tz(date, Fluro.timezone).utcOffset();
-
-            console.log('Offset Please!!!', timezoneOffset);
+            browserOffset = moment.tz(date).utcOffset();
         }
 
         ///////////////////////////////////////////
@@ -687,8 +687,8 @@ angular.module('fluro.util')
             //var tz = Number(Fluro.timezoneOffset);
 
             //Localized time
-            var websiteOffset = Fluro.timezoneOffset;// * 60;
-            var viewerOffset = (date.getTimezoneOffset() * -1); 
+            var websiteOffset = timezoneOffset;// * 60;
+            var viewerOffset = (browserOffset * -1); 
 
             ///////////////////////////////////////////////////////////////
 
