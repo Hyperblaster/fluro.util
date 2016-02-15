@@ -662,8 +662,18 @@ angular.module('fluro.util')
             date = new Date(d);
         }
 
+        ///////////////////////////////////////////
 
-        console.log('LOCAL DATE', Fluro.timezone);
+        
+
+
+
+        if(Fluro.timezone) {
+            
+            var local = moment.tz(date, Fluro.timezone).toDate();
+
+            console.log('TIMEZONE', local, Fluro.timezone);
+        }
 
         ///////////////////////////////////////////
 
