@@ -679,8 +679,9 @@ angular.module('fluro.util')
             browserOffset = moment(date).utcOffset();
 
             var difference = (timezoneOffset - browserOffset);
-
-            date.setTime(date.getTime() + difference);
+            var offsetDifference = difference * 60 * 1000;
+            
+            date.setTime(date.getTime() + offsetDifference);
             //console.log('TIMEZONE', timezoneOffset, browserOffset, timezoneOffset - browserOffset, 'hours');
         }
 
