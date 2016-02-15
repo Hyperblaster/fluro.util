@@ -670,9 +670,9 @@ angular.module('fluro.util')
 
         if(Fluro.timezone) {
             
-            var local = moment.tz(date, Fluro.timezone).toDate();
-            console.log('TIMEZONE', local, Fluro.timezone);
-            return local;
+            var local = moment.tz(date, Fluro.timezone);//.toDate();
+            console.log('TIMEZONE OFFSET CHECK', local.utcOffset(), Fluro.timezone);
+            return local.toDate();
 
         }
 
