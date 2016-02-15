@@ -678,11 +678,15 @@ angular.module('fluro.util')
             timezoneOffset = moment.tz(date, Fluro.timezone).utcOffset();
             browserOffset = moment(date).utcOffset();
 
-            console.log('TIMEZONE', timezoneOffset, browserOffset, timezoneOffset - browserOffset, 'hours');
+            var difference = (timezoneOffset - browserOffset);
+
+            date.setTime(date.getTime() + difference);
+            //console.log('TIMEZONE', timezoneOffset, browserOffset, timezoneOffset - browserOffset, 'hours');
         }
 
         ///////////////////////////////////////////
 
+        /**
         if (timezoneOffset) {
 
             //Timezone
@@ -705,6 +709,7 @@ angular.module('fluro.util')
 
             //console.log('Local time difference', Fluro.timezoneOffset, offsetDifference);
         }
+        /**/
 
         return date;
     }
