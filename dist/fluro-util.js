@@ -661,7 +661,12 @@ angular.module('fluro.util')
         } else {
             date = new Date(d);
         }
-        
+
+
+        console.log('LOCAL DATE', Fluro.timezone);
+
+        ///////////////////////////////////////////
+
         if (Fluro.timezoneOffset) {
 
             //Timezone
