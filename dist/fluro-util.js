@@ -698,7 +698,8 @@ angular.module('fluro.util')
             var hoursDifference = websiteOffset - viewerOffset;
             var offsetDifference = hoursDifference * 60 * 1000;
 
-            console.log('Offset Difference', offsetDifference, timezoneOffset, browserOffset, new Date(date.getTime()), new Date(date.getTime() + offsetDifference));
+            console.log('Hours Difference', hoursDifference, websiteOffset, viewerOffset)
+            //console.log('Offset Difference', offsetDifference, timezoneOffset, browserOffset, new Date(date.getTime()), new Date(date.getTime() + offsetDifference));
             //Adjust the date
             date.setTime(date.getTime() + offsetDifference);
 
