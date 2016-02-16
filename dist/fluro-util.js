@@ -1850,7 +1850,16 @@ angular.module('fluro.util')
         filters: [{
             title: 'Type',
             key: 'restrictType'
-        }]
+        }],
+        columns: [{
+            title: 'Realms',
+            key: 'realms',
+            renderer: 'multi',
+        },
+        {
+            title: 'Author',
+            key: 'author.name'
+        }],
     })
 
     controller.types.push({
