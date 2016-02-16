@@ -1953,7 +1953,7 @@ angular.module('fluro.util')
             key:'privacy',
             renderer: 'privacy',
         }],
-        filter: [{
+        filters: [{
             title: 'File Type',
             key: 'extension'
         }, {
