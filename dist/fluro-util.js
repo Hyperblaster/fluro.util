@@ -822,6 +822,9 @@ angular.module('fluro.util')
        
         if(params.extension && params.extension.length) {
             url += '/file/file.' + params.extension;
+
+            //Dont need to include it anymore
+            delete params.extension;
         }
 
         ////////////////////////////////////////
@@ -901,9 +904,27 @@ angular.module('fluro.util')
         }
 
 
-        if (Fluro.token && !params['access_token']) {
-            params['access_token'] = Fluro.token;
+        ////////////////////////////////////
+       
+        if(params.extension && params.extension.length) {
+            url += '/file/file.' + params.extension;
+
+            //Dont need to include it anymore
+            delete params.extension;
         }
+
+        ////////////////////////////////////////
+
+        //If we haven't requested without token
+        if(!params.withoutToken) {
+
+            //Check to see if we have a token and none has been explicity set
+            if (!params['access_token'] && Fluro.token) {
+                params['access_token'] = Fluro.token;
+            }
+        }
+
+        ////////////////////////////////////////
 
 
         var queryParams = _.map(params, function(v, k) {
