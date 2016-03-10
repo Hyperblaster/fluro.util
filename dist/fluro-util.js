@@ -1865,6 +1865,29 @@ angular.module('fluro.util')
         }]
     })
 
+
+
+    controller.types.push({
+        singular: 'Attendance',
+        plural: 'Attendance Reports',
+        path: 'attendance',
+        columns: [{
+            title: 'Author',
+            key: 'author.name'
+        }, {
+            title: 'Event',
+            key: 'event',
+        },
+        {
+            title: 'Count',
+            key: 'count',
+        }, {
+            title: 'Realms',
+            key: 'realms',
+            renderer: 'multi',
+        }]
+    })
+
     controller.types.push({
         singular: 'Asset',
         plural: 'Assets',
@@ -2104,6 +2127,7 @@ angular.module('fluro.util')
          //   return controller.definedTypes;
         //}
 
+        
         //Make a new request
         controller.definedTypes = FluroContent.endpoint('defined', true, true).query({
             allDefinitions:true,
