@@ -1454,12 +1454,14 @@ angular.module('fluro.util')
             singular: 'Team',
             plural: 'Teams',
             path: 'team',
-            columns: [{
+            columns: [
+            /**{
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi'
 
-            }, {
+            }, /**/
+            {
                 title: 'Tags',
                 key: 'tags',
                 renderer: 'multi'
@@ -1506,12 +1508,16 @@ angular.module('fluro.util')
                     title: 'Date',
                     key: 'startDate',
                     renderer: 'date'
-                }, {
+                }, 
+/**
+                {
                     title: 'Realms',
                     key: 'realms',
                     renderer: 'multi'
 
-                }, {
+                }, 
+                /**/
+                {
                     title: 'Tags',
                     key: 'tags',
                     renderer: 'multi'
@@ -1583,11 +1589,15 @@ angular.module('fluro.util')
             }, {
                 title: 'Family',
                 key: 'family'
-            }, {
+            }, 
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'realm'
-            }],
+            }
+/**/
+            ],
             filters: [{
                 title: 'Gender',
                 key: 'gender'
@@ -1660,11 +1670,15 @@ angular.module('fluro.util')
                 title: 'Date',
                 key: 'created',
                 renderer: 'datetime'
-            }, {
+            }, 
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'realm'
-            }],
+            }
+/**/
+            ],
             filters: [{
                 title: 'Payment Status',
                 key: 'paymentStatus'
@@ -1681,11 +1695,15 @@ angular.module('fluro.util')
             columns: [{
                 title: 'Type',
                 key: 'applicationType'
-            }, {
+            }, 
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi'
-            }, {
+            }
+/**/
+             {
                 title: 'Domain',
                 key: 'domain',
             }, ]
@@ -1730,12 +1748,16 @@ angular.module('fluro.util')
             }, {
                 title: 'Machine Name',
                 key: 'definitionName'
-            }, {
+            }, 
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi'
 
-            }, ],
+            }, 
+/**/
+            ],
             filters: [{
                 title: 'Basic Type',
                 key: 'parentType'
@@ -1891,11 +1913,15 @@ angular.module('fluro.util')
                 title: 'Tags',
                 key: 'tags',
                 renderer: 'multi',
-            }, {
+            }, 
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi',
-            }]
+            }
+/**/
+            ]
         })
 
 
@@ -1913,11 +1939,15 @@ angular.module('fluro.util')
             }, {
                 title: 'Count',
                 key: 'count',
-            }, {
+            }, 
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi',
-            }]
+            }
+/**/
+            ]
         })
 
         controller.types.push({
@@ -1931,11 +1961,15 @@ angular.module('fluro.util')
                 title: 'Tags',
                 key: 'tags',
                 renderer: 'multi',
-            }, {
+            }, 
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi',
-            }, ],
+            }, 
+/**/
+            ],
             filters: [{
                 title: 'File Type',
                 key: 'extension'
@@ -1950,11 +1984,15 @@ angular.module('fluro.util')
                 title: 'Type',
                 key: 'restrictType'
             }],
-            columns: [{
+            columns: [
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi',
-            }, {
+            },
+            /**/
+             {
                 title: 'Author',
                 key: 'author.name'
             }],
@@ -1972,11 +2010,15 @@ angular.module('fluro.util')
                 title: 'Tags',
                 key: 'tags',
                 renderer: 'multi',
-            }, {
+            }, 
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi',
-            }, {
+            }, 
+/**/
+            {
                 title: 'Size',
                 key: 'filesize',
                 renderer: 'filesize',
@@ -2000,11 +2042,15 @@ angular.module('fluro.util')
             columns: [{
                     title: 'Duration',
                     key: 'duration',
-                }, {
+                }, 
+/**
+                {
                     title: 'Realms',
                     key: 'realms',
                     renderer: 'multi',
-                }, {
+                }, 
+/**/
+                {
                     title: 'File Type',
                     key: 'extension'
                 }, {
@@ -2033,11 +2079,15 @@ angular.module('fluro.util')
             }, {
                 title: 'Duration',
                 key: 'duration',
-            }, {
+            }, 
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi',
-            }, {
+            },
+            /**/
+            {
                 title: 'Security',
                 key: 'privacy',
                 renderer: 'privacy',
@@ -2056,11 +2106,14 @@ angular.module('fluro.util')
             singular: 'Site',
             plural: 'Sites',
             path: 'site',
-            columns: [{
+            columns: [
+/**
+            {
                 title: 'Realms',
                 key: 'realms',
                 renderer: 'multi',
-            }, ]
+            }, 
+            /**/]
         })
 
         /////////////////////////////////////
