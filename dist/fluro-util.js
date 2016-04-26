@@ -1583,7 +1583,11 @@ angular.module('fluro.util')
             }, {
                 title: 'Family',
                 key: 'family'
-            }, ],
+            }, {
+                title: 'Realms',
+                key: 'realms',
+                renderer: 'realm'
+            }],
             filters: [{
                 title: 'Gender',
                 key: 'gender'
