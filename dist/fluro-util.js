@@ -1629,13 +1629,21 @@ angular.module('fluro.util')
             }, {
                 title: 'Amount',
                 key: 'transaction.amount'
-            },
+            }, {
+                title: 'Tags',
+                key: 'tags',
+                renderer: 'multi',
+            }, 
             {
                 title: 'Collection Email',
                 key: 'collectionEmail'
             }, {
                 title: 'Transaction',
                 key: 'transaction._id'
+            }],
+            filters: [{
+                title: 'Tags',
+                key: 'tags'
             }]
         })
 
