@@ -23,8 +23,8 @@
     "angular-resource": "^1.3.0",
     "fluro.config": "*",
     "ngstorage": "*",
-    "moment": "^2.11.2",
-    "moment-timezone": "^0.5.0"
+    "moment": "^2.14.1",
+    "moment-timezone": "^0.5.4"
   },
   "resolutions": {
     "angular": "1.5.0"
