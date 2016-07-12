@@ -673,6 +673,7 @@ angular.module('fluro.util')
         ///////////////////////////////////////////
 
         if(Fluro.timezone) {
+            console.log('MOMENT TIMEZONE', moment, moment.tz);
             timezoneOffset = moment.tz(date, Fluro.timezone).utcOffset();
             browserOffset = moment(date).utcOffset();
 
