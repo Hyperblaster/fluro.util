@@ -24,7 +24,7 @@ module.exports = function(grunt) {
             'fluro.util': {
                 cwd: './lib/html',
                 src: 'fluro/**/*.html',
-                dest: 'dist/fluro-util-templates.js',
+                dest: 'dist/fluro.util-templates.js',
                 options: {
                     htmlmin: {
                         collapseBooleanAttributes: true,
@@ -44,7 +44,18 @@ module.exports = function(grunt) {
         concat: {
             js: {
                 src: ['lib/js/**/*.js'],
-                dest: 'dist/fluro-util.js',
+                dest: 'dist/fluro.util.js',
+            }
+        },
+
+        ngAnnotate: {
+            options: {
+                singleQuotes: true
+            },
+            app: {
+                files: {
+                    'dist/fluro.util.js': ['dist/fluro.util.js'],
+                }
             }
         },
         uglify: {
@@ -53,8 +64,8 @@ module.exports = function(grunt) {
             },
             build: {
                 src: [
-                    'dist/fluro-util.js',
-                    'dist/fluro-util-templates.js'
+                    'dist/fluro.util.js',
+                    'dist/fluro.util-templates.js'
                 ],
                 dest: 'dist/fluro.util.min.js'
             }
@@ -63,7 +74,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['watch']);
     //grunt.registerTask('build', ['copy:build', 'htmlmin:build', 'uglify:build', 'cssmin:build']);
-    grunt.registerTask('compile', ['ngtemplates', 'concat', 'uglify']);
+    grunt.registerTask('compile', ['ngtemplates', 'concat', 'ngAnnotate', 'uglify']);
 
     //'autoprefixer', 'cssmin'
 

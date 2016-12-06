@@ -143,7 +143,7 @@ angular.module('fluro.util').filter('chunk', function() {
       return _.memoize(func);
 });
 
-angular.module('fluro.util').filter('formatDate', function(DateTools){
+angular.module('fluro.util').filter('formatDate', ['DateTools', function(DateTools){
   return function(dateString, format){
 
   	// //Create the date object
@@ -162,7 +162,7 @@ angular.module('fluro.util').filter('formatDate', function(DateTools){
     return date.format(format);
   	
   };
-})
+}])
 
 
 // app.filter('formatDate', function(Fluro){
@@ -190,7 +190,7 @@ angular.module('fluro.util').filter('formatDate', function(DateTools){
 
 // })
 angular.module('fluro.util')
-    .filter('plaintext', function(FluroSanitize) {
+    .filter('plaintext', ['FluroSanitize', function(FluroSanitize) {
         return function(text) {
             if (text) {
 
@@ -206,7 +206,7 @@ angular.module('fluro.util')
                 return text;
             }
         };
-    });
+    }]);
 angular.module('fluro.util')
 .filter('trusted', ['$sce',
     function($sce) {
@@ -227,7 +227,7 @@ angular.module('fluro.util')
 
 angular.module('fluro.util')
 
-.service('CacheManager', function($resource, $cacheFactory) {
+.service('CacheManager', ['$resource', '$cacheFactory', function($resource, $cacheFactory) {
 
     //////////////////////////////////////////////////
 
@@ -280,7 +280,7 @@ angular.module('fluro.util')
     return controller;
 
 
-});
+}]);
 angular.module('fluro.util')
 .factory('ContentSelection', function() {
 
@@ -556,7 +556,7 @@ angular.module('fluro.util')
 
 angular.module('fluro.util')
 
-.filter("matchDate", function(Fluro, DateTools) {
+.filter("matchDate", ['Fluro', 'DateTools', function(Fluro, DateTools) {
 
     return function(items, dateString, style) {
 
@@ -621,9 +621,9 @@ angular.module('fluro.util')
         }, []);
 
     };
-})
+}])
 
-.service('DateTools', function(Fluro) {
+.service('DateTools', ['Fluro', function(Fluro) {
 
 
     var controller = {};
@@ -785,7 +785,7 @@ angular.module('fluro.util')
 
     return controller;
 
-});
+}]);
 // angular.module('fluro.util')
 
 // .service('Asset', function(Fluro, $window) {
@@ -1035,7 +1035,7 @@ angular.module('fluro.util')
 
         return controller;
     });
-angular.module('fluro.util').service('FluroStorage', function($rootScope, $localStorage, $sessionStorage) {
+angular.module('fluro.util').service('FluroStorage', ['$rootScope', '$localStorage', '$sessionStorage', function($rootScope, $localStorage, $sessionStorage) {
 
 
     /////////////////////////////////////////////////////
@@ -1091,7 +1091,7 @@ angular.module('fluro.util').service('FluroStorage', function($rootScope, $local
     /////////////////////////////////////////////////////
 
     return controller;
-});
+}]);
 angular.module('fluro.util')
 .factory('ObjectSelection', function() {
 
