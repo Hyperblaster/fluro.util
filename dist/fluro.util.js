@@ -124,6 +124,10 @@ angular.module('fluro.util').filter('divide', function() {
         }
         
         var div = Math.floor(array.length / chunk);
+
+        if(!div) {
+            div = 1;
+        }
                 
         var chunked = _.chunk(array, div);
             return chunked
