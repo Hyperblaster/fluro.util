@@ -260,7 +260,7 @@ angular.module('fluro.util')
     //////////////////////////////////////////////////
     
     controller.clear = function(type) {
-       // console.log('Clear', type, 'cache');
+       console.log('Clear', type, 'cache');
         
         var cache = $cacheFactory.get(type +'-list');
         if(cache) {
@@ -555,12 +555,9 @@ angular.module('fluro.util')
     return ContentSelection;
 
 });
-'use strict';
 
 
-angular.module('fluro.util')
-
-.filter("matchDate", ['Fluro', 'DateTools', function(Fluro, DateTools) {
+angular.module('fluro.util').filter("matchDate", ['Fluro', 'DateTools', function(Fluro, DateTools) {
 
     return function(items, dateString, style) {
 
@@ -625,9 +622,9 @@ angular.module('fluro.util')
         }, []);
 
     };
-}])
+}]);
 
-.service('DateTools', ['Fluro', function(Fluro) {
+angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
 
 
     var controller = {};
