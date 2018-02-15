@@ -1025,7 +1025,7 @@ angular.module('fluro.util')
             /**/
 
 
-            var element = $('<div>' + result + '</div>');
+            var element = angular.element('<div>' + result + '</div>');
 
             //Remove all style attributs
             element.find('*')
