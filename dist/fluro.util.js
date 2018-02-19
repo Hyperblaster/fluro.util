@@ -148,7 +148,7 @@ angular.module('fluro.util').filter('chunk', function() {
 });
 
 angular.module('fluro.util').filter('formatDate', ['DateTools', function(DateTools){
-  return function(dateString, format){
+  return function(dateString, format, timezone){
 
   	// //Create the date object
   	// var date = new Date(dateString);
@@ -160,7 +160,7 @@ angular.module('fluro.util').filter('formatDate', ['DateTools', function(DateToo
   	// } 
   	
   	//Get the Localized date
-  	var date = DateTools.localDate(dateString);
+  	var date = DateTools.localDate(dateString, timezone);
     
     //Return the date in the requested format
     return date.format(format);
@@ -655,7 +655,7 @@ angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
 
     ///////////////////////////////////////
 
-    controller.localDate = function(d) {
+    controller.localDate = function(d, specifiedTimezone) {
 
         //Date
         var date;// = new Date(d);
@@ -673,14 +673,18 @@ angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
 
         ///////////////////////////////////////////
 
-        if(Fluro.timezone) {
+        if(!specifiedTimezone) {
+            specifiedTimezone = Fluro.timezone;
+        }
+
+        if(specifiedTimezone) {
 
             if(!window.moment) {
                 console.log('Moment is not defined')
                 return date;
             }
             // console.log('MOMENT TIMEZONE 2', moment.tz(date, Fluro.timezone).utcOffset());
-            timezoneOffset = window.moment.tz(date, Fluro.timezone).utcOffset();
+            timezoneOffset = window.moment.tz(date, specifiedTimezone).utcOffset();
             browserOffset = window.moment(date).utcOffset();
 
             var difference = (timezoneOffset - browserOffset);
@@ -698,9 +702,10 @@ angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
 
     ///////////////////////////////////////
 
-    controller.expired = function(d) {
+    controller.expired = function(d, specifiedTimezone) {
         var today;// = new Date();
         var checkDate;// = new Date(d);
+
 
         if(Fluro.timezoneOffset) {
             today = controller.localDate();
@@ -729,10 +734,17 @@ angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
             options = {};
         }
 
+        if(!options.timezone) {
+            options.timezone = Fluro.timezone;
+        }
+
+    
+
+
         //////////////////////////////////////////
 
         if (!_.isDate(startDate)) {
-            if(Fluro.timezoneOffset) {
+            if(options.timezone) {
                 startDate = controller.localDate(startDate);
             } else {
                 startDate = new Date(startDate);
@@ -740,7 +752,7 @@ angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
         }
 
         if (!_.isDate(endDate)) {
-            if(Fluro.timezoneOffset) {
+            if(options.timezone) {
                 endDate = controller.localDate(endDate);
             } else {
                 endDate = new Date(endDate);
@@ -751,7 +763,7 @@ angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
 
         var today;
 
-        if(Fluro.timezoneOffset) {
+        if(options.timezone) {
             today = controller.localDate();
         } else {
             today = new Date();
