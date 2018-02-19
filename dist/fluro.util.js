@@ -745,7 +745,7 @@ angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
 
         if (!_.isDate(startDate)) {
             if(options.timezone) {
-                startDate = controller.localDate(startDate);
+                startDate = controller.localDate(startDate, options.timezone);
             } else {
                 startDate = new Date(startDate);
             }
@@ -753,7 +753,7 @@ angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
 
         if (!_.isDate(endDate)) {
             if(options.timezone) {
-                endDate = controller.localDate(endDate);
+                endDate = controller.localDate(endDate, options.timezone);
             } else {
                 endDate = new Date(endDate);
             }
@@ -764,7 +764,7 @@ angular.module('fluro.util').service('DateTools', ['Fluro', function(Fluro) {
         var today;
 
         if(options.timezone) {
-            today = controller.localDate();
+            today = controller.localDate(new Date(), options.timezone);
         } else {
             today = new Date();
         }
